@@ -6,7 +6,7 @@ import path from "path";
 export default defineConfig({
   // If you are using a base path for your application (e.g., when deployed to a subdirectory),
   // set it here. Otherwise, you can omit this property.
-  base: "./client",
+  base: "/",
 
   // Configure the build output directory. By default, it is 'dist'.
   build: {
