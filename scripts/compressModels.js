@@ -1,8 +1,8 @@
 import { readdir, readFile, writeFile } from "fs";
 import { extname, join } from "path";
 import gltfPipeline from "gltf-pipeline";
-const processGltf = gltfPipeline.processGltf;
 
+const processGltf = gltfPipeline.processGltf;
 const inputDir = "server\\static";
 const outputDir = "server\\static_output";
 

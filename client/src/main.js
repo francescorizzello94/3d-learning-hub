@@ -1,4 +1,4 @@
-import { ModelViewer } from "./ModelViewer";
+import { ModelViewer } from "./components/ModelViewer";
 
 document.addEventListener("DOMContentLoaded", (event) => {
   const modelContainer = document.getElementById("model-container");
