@@ -1,4 +1,5 @@
 import { ModelViewer } from "./ModelViewer";
+import axios from "axios";
 
 export const ModelViewerPage = (params) => {
   const modelDetailsContainer = document.getElementById(
