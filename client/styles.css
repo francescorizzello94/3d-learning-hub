@@ -16,7 +16,7 @@
     --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
     /* --font-icon: null; */
 
-    --text-color: #2D2F34;
+    --text-color: #808695;
     --heading-color: var(--text-color);
     --light-text-color: #707682;
     --link-color: #0074E0;
@@ -24,7 +24,7 @@
     --ins-background: #E6F7EB;
     --del-background: #FFE6E6;
     --mark-background: #FFF9E6;
-    --page-background: white;
+    --page-background: black;
     --element-background: #F0F1F3;
     --accent-color: var(--link-color);
     --invalid-color: #DC2F2F;
