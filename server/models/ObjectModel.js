@@ -5,7 +5,6 @@ const objectModelSchema = new mongoose.Schema({
   description: { type: String, required: true },
   category: { type: String, required: true },
   modelUrl: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now, immutable: true },
   updatedAt: Date,
   feedbackValue: { type: Number, default: 0 },
 });
