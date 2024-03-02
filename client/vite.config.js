@@ -32,11 +32,6 @@ export default defineConfig({
       // Proxy API requests to the Express server running on port 3000.
       "/api": "http://localhost:3000",
     },
-    hmr: {
-      protocol: "ws",
-      host: "localhost",
-      port: 5000,
-    },
   },
 
   // If you need to import modules using absolute paths (aliasing), configure them here.
