@@ -9,6 +9,7 @@ export const loadCategories = () => {
       const categoriesContainer = document.getElementById(
         "categories-container"
       );
+      categoriesContainer.innerHTML = "";
       response.data.forEach((category) => {
         const categoryButton = document.createElement("button");
         categoryButton.textContent = category;

@@ -1,6 +1,7 @@
 import { Homepage } from "./components/Homepage";
 import { CategoryPage } from "./components/CategoryPage";
 import { ModelViewerPage } from "./components/ModelViewerPage";
+import { clearApp } from "./main";
 
 function getPathSegments(url) {
   const trimmed = url.replace(/^\/+|\/+$/g, "");
@@ -49,6 +50,7 @@ export const router = () => {
     const { route, params } = match;
     route.view(params);
   } else {
+    clearApp();
     document.querySelector("#app").innerHTML = `
             <h1>404 Not Found</h1>
             <p>The page you are looking for does not exist. <a href="/" data-link>Go back home</a>.</p>

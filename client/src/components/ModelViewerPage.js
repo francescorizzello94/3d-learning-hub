@@ -1,29 +1,29 @@
+import { addContainer, clearApp } from "../main";
 import { ModelViewer } from "./ModelViewer";
 import axios from "axios";
 
-export const ModelViewerPage = (params) => {
+export function ModelViewerPage(params) {
+  clearApp();
+  addContainer("model-details-container");
+  addContainer("model-container");
+  fetchModelDetails(params.id);
+}
+
+function fetchModelDetails(modelId) {
   const modelDetailsContainer = document.getElementById(
     "model-details-container"
   );
-  modelDetailsContainer.innerHTML = "<p>Loading model details...</p>";
-  fetchModelDetails(params.id);
-};
-
-function fetchModelDetails(modelId) {
   axios
     .get(`/api/objects/${modelId}`)
     .then((response) => {
       console.log("Model Viewer Page Response: ", response.data);
-      const modelDetailsContainer = document.getElementById(
-        "model-details-container"
-      );
+
       modelDetailsContainer.innerHTML = "";
 
       const modelData = response.data;
       const detailsHtml = `
           <h2>${modelData.title}</h2>
           <p>${modelData.description}</p>
-          // Additional model details here
         `;
       modelDetailsContainer.innerHTML = detailsHtml;
 

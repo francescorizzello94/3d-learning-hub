@@ -1,7 +1,16 @@
-import { ModelViewer } from "./components/ModelViewer";
+// main.js
+export const clearApp = () => {
+  const app = document.getElementById("app");
+  while (app.firstChild) {
+    app.firstChild.remove();
+  }
+};
 
-document.addEventListener("DOMContentLoaded", (event) => {
-  /*   const modelContainer = document.getElementById("model-container");
-  const modelUrl = "/models/phonex.gltf";
-  ModelViewer(modelContainer, modelUrl); */
-});
+export const addContainer = (id) => {
+  const app = document.getElementById("app");
+  if (!document.getElementById(id)) {
+    const container = document.createElement("div");
+    container.id = id;
+    app.appendChild(container);
+  }
+};
