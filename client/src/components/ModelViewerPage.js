@@ -1,22 +1,25 @@
+import { addContainer, clearApp } from "../main";
+import { hideLoading, showLoading } from "../util/loading";
 import { ModelViewer } from "./ModelViewer";
 import axios from "axios";
 
 export const ModelViewerPage = (params) => {
-  const modelDetailsContainer = document.getElementById(
-    "model-details-container"
-  );
-  modelDetailsContainer.innerHTML = "<p>Loading model details...</p>";
+  clearApp();
+  addContainer("model-details-container");
+  addContainer("model-container");
   fetchModelDetails(params.id);
 };
 
 function fetchModelDetails(modelId) {
+  const modelDetailsContainer = document.getElementById(
+    "model-details-container"
+  );
+  showLoading();
   axios
     .get(`/api/objects/${modelId}`)
     .then((response) => {
       console.log("Model Viewer Page Response: ", response.data);
-      const modelDetailsContainer = document.getElementById(
-        "model-details-container"
-      );
+
       modelDetailsContainer.innerHTML = "";
 
       const modelData = response.data;
@@ -36,5 +39,8 @@ function fetchModelDetails(modelId) {
       console.error("Fetching model details failed:", error);
       modelDetailsContainer.innerHTML =
         "<p>An error occurred while loading the model details.</p>";
+    })
+    .finally(() => {
+      hideLoading();
     });
 }
