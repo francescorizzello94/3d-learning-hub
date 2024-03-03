@@ -2,6 +2,7 @@ import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import * as THREE from "three";
+import * as dat from "dat.gui";
 
 // cache the model in an object
 const modelCache = {};
@@ -53,6 +54,14 @@ export const ModelViewer = (container, modelUrl) => {
     return;
   }
 
+  const gui = new dat.GUI();
+  const positionFolder = gui.addFolder("Position");
+  const modelSettings = {
+    posX: 0,
+    posY: 0,
+    posZ: 0,
+  };
+
   loader.load(
     modelUrl,
     function (gltf) {
@@ -77,6 +86,33 @@ export const ModelViewer = (container, modelUrl) => {
 
       // Set the camera to frame the model nicely
       camera.position.z = center.z + cameraZ;
+
+      // dat.gui controls
+
+      modelSettings.posX = gltf.scene.position.x;
+      modelSettings.posY = gltf.scene.position.y;
+      modelSettings.posZ = gltf.scene.position.z;
+
+      positionFolder
+        .add(modelSettings, "posX", -10, 10, 0.1)
+        .name("Position X")
+        .onChange((value) => {
+          gltf.scene.position.x = value;
+        });
+      positionFolder
+        .add(modelSettings, "posY", -10, 10, 0.1)
+        .name("Position Y")
+        .onChange((value) => {
+          gltf.scene.position.y = value;
+        });
+      positionFolder
+        .add(modelSettings, "posZ", -10, 10, 0.1)
+        .name("Position Z")
+        .onChange((value) => {
+          gltf.scene.position.z = value;
+        });
+
+      positionFolder.open();
 
       scene.add(gltf.scene);
       modelCache[modelUrl] = gltf.scene;

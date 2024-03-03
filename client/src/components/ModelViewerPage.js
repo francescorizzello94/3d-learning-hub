@@ -5,8 +5,8 @@ import axios from "axios";
 
 export const ModelViewerPage = (params) => {
   clearApp();
-  addContainer("model-details-container");
   addContainer("model-container");
+  addContainer("model-details-container");
   fetchModelDetails(params.id);
 };
 
@@ -26,7 +26,6 @@ function fetchModelDetails(modelId) {
       const detailsHtml = `
           <h2>${modelData.title}</h2>
           <p>${modelData.description}</p>
-          // Additional model details here
         `;
       modelDetailsContainer.innerHTML = detailsHtml;
 
