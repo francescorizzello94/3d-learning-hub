@@ -1,13 +1,17 @@
 import axios from "axios";
 import { navigateTo } from "../router";
+import { addContainer, clearApp } from "../main";
+import { hideLoading, showLoading } from "../util/loading";
 
 export function CategoryPage(params) {
-  const modelsContainer = document.getElementById("model-container");
-  modelsContainer.innerHTML = "<p>Loading...</p>";
+  clearApp();
+  addContainer("categories-container");
+  addContainer("model-container");
   fetchCategoryModels(params.categoryName);
 }
 
 function fetchCategoryModels(categoryName) {
+  showLoading();
   axios
     .get(`/api/categories/${categoryName}/models`)
     .then((response) => {
@@ -37,5 +41,8 @@ function fetchCategoryModels(categoryName) {
       console.error("Fetching models failed:", error);
       modelsContainer.innerHTML =
         "<p>An error occurred while loading the models.</p>";
+    })
+    .finally(() => {
+      hideLoading();
     });
 }
