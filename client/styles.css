@@ -146,6 +146,12 @@
 }
 
 html,
+body {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+html,
 body,
 div,
 span,
