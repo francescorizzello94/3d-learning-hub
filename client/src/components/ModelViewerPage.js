@@ -1,5 +1,6 @@
 import { addContainer, clearApp } from "../main";
 import { hideLoading, showLoading } from "../util/loading";
+import { splitDescription } from "../util/splitDescription";
 import { ModelViewer } from "./ModelViewer";
 import axios from "axios";
 
@@ -29,9 +30,17 @@ function fetchModelDetails(modelId) {
         `;
       modelDetailsContainer.innerHTML = detailsHtml;
 
+      const modelDescriptionSplitContentForBoxes = splitDescription(
+        modelData.description
+      );
+
       if (modelData.modelUrl) {
         const modelContainer = document.getElementById("model-container");
-        ModelViewer(modelContainer, modelData.modelUrl);
+        ModelViewer(
+          modelContainer,
+          modelData.modelUrl,
+          modelDescriptionSplitContentForBoxes
+        );
       }
     })
     .catch((error) => {
