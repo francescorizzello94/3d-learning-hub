@@ -3,6 +3,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import * as THREE from "three";
 import * as dat from "dat.gui";
+import { createInfoBoxes } from "../util/createInfoBoxes";
 
 // cache the model in an object
 const modelCache = {};
@@ -15,7 +16,7 @@ dracoLoader.preload();
 const loader = new GLTFLoader();
 loader.setDRACOLoader(dracoLoader);
 
-export const ModelViewer = (container, modelUrl) => {
+export const ModelViewer = (container, modelUrl, infoContent) => {
   console.log("Initializing ModelViewer with modelUrl:", modelUrl);
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(
@@ -115,6 +116,7 @@ export const ModelViewer = (container, modelUrl) => {
       positionFolder.open();
 
       scene.add(gltf.scene);
+      createInfoBoxes(infoContent, scene, camera);
       modelCache[modelUrl] = gltf.scene;
       loadingScreen.style.display = "none";
 
