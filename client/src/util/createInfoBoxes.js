@@ -1,20 +1,18 @@
 import * as THREE from "three";
 
-export const createInfoBoxes = (infoArray, scene, camera) => {
+export const createInfoBoxes = (infoArray, scene) => {
   const scale = 0.01;
-  const horizontalOffset = 5;
-  const verticalOffset = 2;
+  infoArray = infoArray.slice(0, 4);
+
+  const horizontalDistance = 4;
+  const verticalDistance = 2.5;
 
   const positions = [
-    new THREE.Vector3(-horizontalOffset, verticalOffset, 0),
-    new THREE.Vector3(-horizontalOffset, -verticalOffset, 0),
-    new THREE.Vector3(horizontalOffset, verticalOffset, 0),
-    new THREE.Vector3(horizontalOffset, -verticalOffset, 0),
+    new THREE.Vector3(-horizontalDistance, verticalDistance, 0), // Top left
+    new THREE.Vector3(-horizontalDistance, -verticalDistance, 0), // Bottom left
+    new THREE.Vector3(horizontalDistance, verticalDistance, 0), // Top right
+    new THREE.Vector3(horizontalDistance, -verticalDistance, 0), // Bottom right
   ];
-
-  if (infoArray.length > positions.length) {
-    infoArray = infoArray.slice(0, positions.length);
-  }
 
   infoArray.forEach((infoContent, index) => {
     const canvas = document.createElement("canvas");
@@ -22,7 +20,7 @@ export const createInfoBoxes = (infoArray, scene, camera) => {
     canvas.width = 512;
     canvas.height = 256;
 
-    context.fillStyle = "#fff";
+    context.fillStyle = "white";
     context.font = "20px Arial";
     context.textAlign = "center";
     context.textBaseline = "middle";
@@ -33,35 +31,30 @@ export const createInfoBoxes = (infoArray, scene, camera) => {
       canvas.width / 2,
       canvas.height / 2,
       canvas.width - 20,
-      20
+      24
     );
 
     const texture = new THREE.CanvasTexture(canvas);
     texture.needsUpdate = true;
 
-    const material = new THREE.MeshBasicMaterial({
+    const spriteMaterial = new THREE.SpriteMaterial({
       map: texture,
       transparent: true,
     });
+    const sprite = new THREE.Sprite(spriteMaterial);
 
-    const geometry = new THREE.PlaneGeometry(
-      canvas.width * scale,
-      canvas.height * scale
-    );
+    sprite.scale.set(canvas.width * scale, canvas.height * scale, 1);
 
-    const mesh = new THREE.Mesh(geometry, material);
+    sprite.position.copy(positions[index]);
 
-    mesh.position.copy(positions[index]);
-
-    mesh.lookAt(camera.position);
-
-    scene.add(mesh);
+    scene.add(sprite);
   });
 };
 
 function wrapText(context, text, x, y, maxWidth, lineHeight) {
   const words = text.split(" ");
   let line = "";
+
   for (let n = 0; n < words.length; n++) {
     const testLine = line + words[n] + " ";
     const metrics = context.measureText(testLine);
