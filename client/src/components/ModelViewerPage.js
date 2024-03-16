@@ -1,4 +1,5 @@
 import { addContainer, clearApp } from "../main";
+import { loadFeedback } from "../util/loadFeedback";
 import { hideLoading, showLoading } from "../util/loading";
 import { splitDescription } from "../util/splitDescription";
 import { ModelViewer } from "./ModelViewer";
@@ -8,6 +9,7 @@ export const ModelViewerPage = (params) => {
   clearApp();
   addContainer("model-container");
   addContainer("model-details-container");
+  addContainer("feedback-container");
   fetchModelDetails(params.id);
 };
 
@@ -41,6 +43,7 @@ function fetchModelDetails(modelId) {
           modelData.modelUrl,
           modelDescriptionSplitContentForBoxes
         );
+        loadFeedback(modelId);
       }
     })
     .catch((error) => {

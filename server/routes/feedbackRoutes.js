@@ -1,6 +1,7 @@
 import express from "express";
 import FeedbackModel from "../models/FeedbackModel.js";
 import ObjectModel from "../models/ObjectModel.js";
+import mongoose from "mongoose";
 
 const feedbackRouter = express.Router();
 
@@ -18,17 +19,6 @@ feedbackRouter.post("/", async (req, res) => {
     const feedback = new FeedbackModel({ modelId, rating, comment });
     await feedback.save();
 
-    // update the feedbackValue of the model
-
-    const feedbacks = await FeedbackModel.find({ modelId: modelId });
-    const averageRating = feedbacks.reduce(
-      (acc, feedback) => acc + feedback.rating,
-      0
-    );
-
-    model.feedbackValue = averageRating / feedbacks.length;
-    await model.save();
-
     res.json(feedback);
   } catch (e) {
     if (e.kind === "ObjectId") {
@@ -42,18 +32,34 @@ feedbackRouter.post("/", async (req, res) => {
 
 feedbackRouter.get("/:modelId", async (req, res) => {
   try {
-    const model = await ObjectModel.findById(req.params.modelId);
-    if (!model) {
-      return res.status(404).json({ message: "Model not found" });
-    }
+    const modelId = req.params.modelId;
 
-    const feedback = await FeedbackModel.find({ modelId: req.params.modelId });
-    res.json(feedback);
-  } catch (e) {
-    if (e.kind === "ObjectId") {
+    if (!mongoose.Types.ObjectId.isValid(modelId)) {
       return res.status(400).json({ message: "Invalid model ID format" });
     }
-    res.status(500).json({ message: e.message });
+
+    const feedback = await FeedbackModel.find({ modelId });
+
+    const avgRating = await FeedbackModel.aggregate([
+      { $match: { modelId: new mongoose.Types.ObjectId(modelId) } }, // Correct usage if needed
+      { $group: { _id: null, avgRating: { $avg: "$rating" } } },
+    ]);
+
+    console.log("avgRating", avgRating);
+
+    res.json({
+      feedback,
+      avgRating:
+        avgRating.length > 0
+          ? avgRating[0].avgRating.toFixed(1)
+          : "No feedback yet",
+    });
+  } catch (e) {
+    console.error("An error occurred while fetching feedback", e);
+    res.status(500).json({
+      message: "An error occurred while fetching feedback",
+      error: e.toString(),
+    });
   }
 });
 

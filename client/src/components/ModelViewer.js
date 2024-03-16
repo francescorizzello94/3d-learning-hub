@@ -88,8 +88,6 @@ export const ModelViewer = (container, modelUrl, infoContent) => {
       // Set the camera to frame the model nicely
       camera.position.z = center.z + cameraZ;
 
-      // dat.gui controls
-
       modelSettings.posX = gltf.scene.position.x;
       modelSettings.posY = gltf.scene.position.y;
       modelSettings.posZ = gltf.scene.position.z;
