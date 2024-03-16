@@ -1650,3 +1650,7 @@ details.accordion .details-content {
 h1 {
     color: #5e777c
 }
+
+input {
+    color: white;
+}
