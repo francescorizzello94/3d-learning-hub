@@ -91,7 +91,14 @@ const appendFeedbackForm = (modelId, container) => {
 
   container.appendChild(form);
 
-  submitButton.onclick = () =>
+  submitButton.onclick = () => {
+    if (ratingInput.value === "") {
+      feedbackMessageContainer.textContent =
+        "Please select a rating before submitting.";
+      feedbackMessageContainer.style.color = "red";
+      return;
+    }
+
     handleSubmit(
       modelId,
       ratingInput.value,
@@ -100,6 +107,7 @@ const appendFeedbackForm = (modelId, container) => {
       loadingSpinner,
       feedbackMessageContainer
     );
+  };
 };
 
 const updateStarRating = (starContainer, value, ratingInput) => {
