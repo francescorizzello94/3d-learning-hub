@@ -1654,3 +1654,108 @@ h1 {
 input {
     color: white;
 }
+
+.feedback-container {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #75889a;
+    border-radius: 2rem;
+    padding: 20px;
+    margin: 10px 20px;
+    background-color: #1f1f1f;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.feedback-container:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.feedback-container>* {
+    margin-bottom: 10px;
+}
+
+.feedback-container>*:last-child {
+    margin-bottom: 0;
+}
+
+.average-rating-display {
+    color: aqua;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 10px;
+    border: 2px solid aqua;
+    border-radius: 10px;
+    background-color: rgba(0, 255, 255, 0.1);
+    box-shadow: 0 4px 8px 0 rgba(0, 255, 255, 0.2);
+}
+
+.recent-comment-display {
+    color: rgb(199, 214, 88);
+    font-size: 1em;
+    padding: 10px;
+    border: 2px solid coral;
+    border-radius: 10px;
+    background-color: rgba(255, 127, 80, 0.1);
+    box-shadow: 0 4px 8px 0 rgba(255, 127, 80, 0.2);
+}
+
+.star-rating-container {
+    padding: 1rem;
+}
+
+.star {
+    color: gold;
+    cursor: pointer;
+    font-size: 2em;
+}
+
+.star:hover,
+.star:hover~.star {
+    color: #ccc;
+}
+
+.comment-input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #75889a;
+    border-radius: 10px;
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+.submit-feedback-button {
+    padding: 0.5em 1em;
+    border: none;
+    line-height: 1em;
+    background-color: #75889a;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-feedback-button:hover {
+    background-color: #5c6d7d;
+}
+
+.average-rating-display,
+.recent-comment-display {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.average-rating-display:hover {
+    background-color: rgba(5, 5, 1, 0.802);
+    transform: scaleZ(1.05);
+}
+
+.recent-comment-display:hover {
+    background-color: rgba(5, 5, 0, 0.996);
+    transform: scaleZ(1.05);
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}

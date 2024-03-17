@@ -1,5 +1,5 @@
 import axios from "axios";
-import { handleSubmit, submitFeedback } from "./submitFeedback";
+import { handleSubmit } from "./submitFeedback";
 
 export const loadFeedback = (modelId) => {
   const feedbackContainer =
@@ -8,6 +8,7 @@ export const loadFeedback = (modelId) => {
     .get(`/api/feedback/${modelId}`)
     .then((response) => {
       feedbackContainer.innerHTML = "";
+      feedbackContainer.className = "feedback-container";
 
       const avgRatingDisplayValue = `Average Rating: ${parseFloat(
         response.data.avgRating
@@ -35,6 +36,7 @@ export const loadFeedback = (modelId) => {
 const createFeedbackContainer = () => {
   const feedbackContainer = document.createElement("div");
   feedbackContainer.id = "feedback-container";
+  feedbackContainer.className = "feedback-container";
   document.body.appendChild(feedbackContainer);
   return feedbackContainer;
 };
@@ -46,12 +48,15 @@ const appendFeedbackForm = (modelId, container) => {
   const starContainer = document.createElement("div");
   starContainer.className = "star-rating-container";
 
+  const inputContainer = document.createElement("div");
+  inputContainer.className = "input-container";
+
   const ratingInput = document.createElement("input");
   ratingInput.type = "hidden";
 
   const commentInput = document.createElement("input");
   commentInput.type = "text";
-  commentInput.placeholder = "Leave a comment...";
+  commentInput.placeholder = "Help us improve your learning experience!";
   commentInput.className = "comment-input";
 
   const submitButton = document.createElement("button");
@@ -76,10 +81,11 @@ const appendFeedbackForm = (modelId, container) => {
     starContainer.appendChild(star);
   }
 
-  form.appendChild(starContainer);
-  form.appendChild(ratingInput);
-  form.appendChild(commentInput);
-  form.appendChild(submitButton);
+  inputContainer.appendChild(starContainer);
+  inputContainer.appendChild(commentInput);
+  inputContainer.appendChild(submitButton);
+
+  form.appendChild(inputContainer);
   form.appendChild(loadingSpinner);
   form.appendChild(feedbackMessageContainer);
 
