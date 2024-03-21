@@ -34,10 +34,14 @@ export const loadFeedback = (modelId) => {
 };
 
 const createFeedbackContainer = () => {
-  const feedbackContainer = document.createElement("div");
-  feedbackContainer.id = "feedback-container";
-  feedbackContainer.className = "feedback-container";
-  document.body.appendChild(feedbackContainer);
+  let feedbackContainer = document.getElementById("feedback-container");
+  if (!feedbackContainer) {
+    feedbackContainer = document.createElement("div");
+    feedbackContainer.id = "feedback-container";
+    feedbackContainer.className = "feedback-container";
+    document.body.appendChild(feedbackContainer);
+  }
+
   return feedbackContainer;
 };
 
