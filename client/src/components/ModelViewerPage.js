@@ -26,10 +26,20 @@ function fetchModelDetails(modelId) {
       modelDetailsContainer.innerHTML = "";
 
       const modelData = response.data;
+      const formattedDescription = modelData.description
+        .split(";")
+        .map((section) => {
+          const [title, ...content] = section.split(":");
+          return `<strong>${title}:</strong>${content.join(":")}`;
+        })
+        .join("<br/><br/>");
       const detailsHtml = `
-          <h2>${modelData.title}</h2>
-          <p>${modelData.description}</p>
-        `;
+        <h2>${modelData.title}</h2>
+        <details>
+            <summary>View Model Description</summary>
+            <p>${formattedDescription}</p>
+        </details>
+`;
       modelDetailsContainer.innerHTML = detailsHtml;
 
       const modelDescriptionSplitContentForBoxes = splitDescription(

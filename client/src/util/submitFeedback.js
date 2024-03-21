@@ -14,13 +14,6 @@ export const handleSubmit = (
   feedbackContainer,
   feedbackMessageContainer
 ) => {
-  if (!rating) {
-    feedbackMessageContainer.textContent =
-      "Please select a rating before submitting.";
-    feedbackMessageContainer.style.color = "red";
-    return;
-  }
-
   submitButton.disabled = true;
   loadingSpinner.style.display = "block";
   feedbackMessageContainer ? (feedbackMessageContainer.textContent = "") : null;
