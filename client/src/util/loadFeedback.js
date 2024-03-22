@@ -10,9 +10,10 @@ export const loadFeedback = (modelId) => {
       feedbackContainer.innerHTML = "";
       feedbackContainer.className = "feedback-container";
 
-      const avgRatingDisplayValue = `Average Rating: ${parseFloat(
-        response.data.avgRating
-      )} / 5`;
+      const avgRatingDisplayValue =
+        !isNaN(response.data.avgRating) && response.data.avgRating !== 0
+          ? `Average Rating: ${parseFloat(response.data.avgRating)} / 5`
+          : "No rating has been entered for this model yet";
 
       const avgRatingDisplay = document.createElement("div");
       avgRatingDisplay.className = "average-rating-display";
