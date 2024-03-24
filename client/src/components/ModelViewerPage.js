@@ -48,13 +48,17 @@ function fetchModelDetails(modelId) {
 
       if (modelData.modelUrl) {
         const modelContainer = document.getElementById("model-container");
-        ModelViewer(
+        ModelViewer.init(
           modelContainer,
           modelData.modelUrl,
           modelDescriptionSplitContentForBoxes
         );
         loadFeedback(modelId);
       }
+
+      window.addEventListener("popstate", function () {
+        ModelViewer.cleanup();
+      });
     })
     .catch((error) => {
       console.error("Fetching model details failed:", error);
