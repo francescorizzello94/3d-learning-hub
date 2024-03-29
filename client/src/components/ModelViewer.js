@@ -66,20 +66,14 @@ export const ModelViewer = (() => {
       controls.update();
     });
 
-    function animate() {
-      requestAnimationFrame(animate);
-      controls.update();
-      renderer.render(scene, camera);
-      console.log("Render complete");
-    }
-    animate();
     console.log("Starting model load...");
+
+    let mixer;
 
     loader.load(
       modelUrl,
       function (gltf) {
         console.log("Model loaded successfully");
-
         // Calculate the bounding box of the model
         const bbox = new THREE.Box3().setFromObject(gltf.scene);
         const size = bbox.getSize(new THREE.Vector3());
@@ -126,6 +120,25 @@ export const ModelViewer = (() => {
         positionFolder.open();
 
         scene.add(gltf.scene);
+        mixer = new THREE.AnimationMixer(gltf.scene);
+        const animations = gltf.animations;
+        console.log("Animations:", animations);
+        console.log("Number of animations:", animations.length);
+        if (animations && animations.length) {
+          const action = mixer.clipAction(animations[0]);
+          action.play();
+        }
+        const clock = new THREE.Clock();
+        function animate() {
+          requestAnimationFrame(animate);
+
+          const delta = clock.getDelta();
+
+          if (mixer) mixer.update(delta);
+
+          renderer.render(scene, camera);
+        }
+        animate();
         createInfoBoxes(infoContent, scene, camera);
         loadingScreen.style.display = "none";
 
