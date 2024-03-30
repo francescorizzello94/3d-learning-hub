@@ -54,13 +54,21 @@ app.use("/api/feedback", feedbackRouter);
 // Static route for compressed model files
 app.use("/models", express.static(join(__dirname, "static_output")));
 
-// Serve Vite-built client files
-app.use(express.static(join(__dirname, "../client/dist")));
-
-// All other routes should serve the index.html file
-app.get("*", (req, res) => {
-  res.sendFile(join(__dirname, "../client/dist", "index.html"));
-});
+if (process.env.NODE_ENV === "production") {
+  // Production: Serve static files from 'dist'
+  app.use(express.static(join(__dirname, "../client/dist")));
+  app.get("*", (req, res) => {
+    res.sendFile(join(__dirname, "../client/dist", "index.html"));
+  });
+} else {
+  // Development: Use Vite's server for frontend
+  const { createServer } = await import("vite");
+  const vite = await createServer({
+    server: { middlewareMode: "html" },
+    root: join(__dirname, "../client"),
+  });
+  app.use(vite.middlewares);
+}
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
