@@ -20,7 +20,7 @@
     --heading-color: var(--text-color);
     --light-text-color: #707682;
     --link-color: #0074E0;
-    --link-color-alt: #0263BC;
+    --link-color-alt: #22ada6;
     --ins-background: #E6F7EB;
     --del-background: #FFE6E6;
     --mark-background: #FFF9E6;
@@ -1778,4 +1778,19 @@ details summary {
 
 details p {
     margin: 0;
+}
+
+#app {
+    position: relative;
+}
+
+#categories-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    width: 60%;
 }
