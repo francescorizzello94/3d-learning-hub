@@ -7,6 +7,12 @@ export function CategoryPage(params) {
   clearApp();
   addContainer("categories-container");
   addContainer("model-container");
+  const categoryName = params.categoryName;
+  const appContainer = document.getElementById("app");
+
+  const categoryTitle = document.createElement("h3");
+  categoryTitle.textContent = `${categoryName}`;
+  appContainer.insertBefore(categoryTitle, appContainer.firstChild);
   fetchCategoryModels(params.categoryName);
 }
 
