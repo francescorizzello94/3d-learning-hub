@@ -1,4 +1,4 @@
-import { readdir, readFile, writeFile } from "fs";
+import { readdir, readFile, writeFile, existsSync } from "fs";
 import { extname, join } from "path";
 import gltfPipeline from "gltf-pipeline";
 
@@ -13,6 +13,13 @@ readdir(inputDir, (err, files) => {
     if (extname(file) === ".gltf" || extname(file) === ".glb") {
       const inputPath = join(inputDir, file);
       const outputPath = join(outputDir, file);
+
+      if (existsSync(outputPath)) {
+        console.log(
+          `File ${file} already exists in the output directory. Skipping...`
+        );
+        return;
+      }
 
       const options = {
         dracoOptions: {
