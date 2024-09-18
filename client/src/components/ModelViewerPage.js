@@ -75,9 +75,21 @@ function fetchModelDetails(modelId) {
   document
     .getElementById("scroll-button")
     .addEventListener("click", function () {
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: "smooth",
-      });
+      const scrollButton = document.getElementById("scroll-button");
+      if (scrollButton.innerHTML === "↓") {
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: "smooth",
+        });
+        scrollButton.innerHTML = "↑";
+        scrollButton.title = "Scroll Up";
+      } else {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+        scrollButton.innerHTML = "↓";
+        scrollButton.title = "Scroll Down";
+      }
     });
 }
