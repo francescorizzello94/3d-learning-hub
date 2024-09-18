@@ -1870,3 +1870,28 @@ details p {
         width: 70%;
     }
 }
+
+#scroll-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background-color: #5f666d;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#scroll-button:hover {
+    background-color: #6ea3dc;
+    transform: scale(1.1);
+}
+
+#scroll-button:active {
+    transform: scale(0.9);
+}
