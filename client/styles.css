@@ -1795,8 +1795,36 @@ input {
     transition: background-color 0.3s ease;
 }
 
-.submit-feedback-button:hover {
-    background-color: #0c79df;
+.submit-feedback-button {
+    padding: 0.75em 1.5em;
+    border: none;
+    line-height: 1.2em;
+    background-color: #75889a;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    text-align: center;
+    white-space: normal;
+    overflow: visible;
+}
+
+@media (min-width: 768px) {
+    .submit-feedback-button {
+        max-width: 50%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .submit-feedback-button {
+        max-width: 30%;
+    }
 }
 
 .average-rating-display,
