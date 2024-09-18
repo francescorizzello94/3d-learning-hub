@@ -68,4 +68,28 @@ function fetchModelDetails(modelId) {
     .finally(() => {
       hideLoading();
     });
+
+  const scrollButtonHtml = `<button id="scroll-button" title="Scroll Down">↓</button>`;
+  document.body.insertAdjacentHTML("beforeend", scrollButtonHtml);
+
+  document
+    .getElementById("scroll-button")
+    .addEventListener("click", function () {
+      const scrollButton = document.getElementById("scroll-button");
+      if (scrollButton.innerHTML === "↓") {
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: "smooth",
+        });
+        scrollButton.innerHTML = "↑";
+        scrollButton.title = "Scroll Up";
+      } else {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+        scrollButton.innerHTML = "↓";
+        scrollButton.title = "Scroll Down";
+      }
+    });
 }
