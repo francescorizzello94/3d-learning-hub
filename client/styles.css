@@ -1203,23 +1203,84 @@ button,
 input[type="submit"],
 input[type="reset"],
 input[type="button"] {
-    display: block;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     white-space: nowrap;
     text-decoration: none;
-    width: min-content;
-    background-color: transparent;
+    width: 100%;
+    max-width: 200px;
+    background-color: var(--link-color);
     cursor: pointer;
     box-sizing: border-box;
 
     color: white;
-    background-color: var(--link-color);
     border: 1px solid var(--link-color);
-    margin-block-end: var(--flow-space);
+    margin: 0.5rem;
 
     font-weight: bold;
-    padding-inline-start: var(--sp_4);
-    padding-inline-end: var(--sp_4);
+    padding: var(--sp_2) var(--sp_4);
+}
+
+@media (max-width: 320px) {
+
+    .button,
+    button,
+    input[type="submit"],
+    input[type="reset"],
+    input[type="button"] {
+        max-width: 100px;
+        padding: var(--sp_1) var(--sp_2);
+    }
+}
+
+@media (min-width: 321px) and (max-width: 480px) {
+
+    .button,
+    button,
+    input[type="submit"],
+    input[type="reset"],
+    input[type="button"] {
+        max-width: 150px;
+        padding: var(--sp_1) var(--sp_3);
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+
+    .button,
+    button,
+    input[type="submit"],
+    input[type="reset"],
+    input[type="button"] {
+        max-width: 200px;
+        padding: var(--sp_2) var(--sp_4);
+    }
+}
+
+@media (min-width: 769px) {
+
+    .button,
+    button,
+    input[type="submit"],
+    input[type="reset"],
+    input[type="button"] {
+        max-width: 250px;
+        padding: var(--sp_2) var(--sp_4);
+    }
+}
+
+@media (min-width: 540px) and (max-width: 720px) {
+
+    .button,
+    button,
+    input[type="submit"],
+    input[type="reset"],
+    input[type="button"] {
+        max-width: 180px;
+        padding: var(--sp_2) var(--sp_3);
+    }
 }
 
 .button img,
@@ -1788,9 +1849,24 @@ details p {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -100%);
+    transform: translate(-50%, -50%);
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    width: 60%;
+    width: 90%;
+    max-width: 100%;
+    overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+    #categories-container {
+        grid-template-columns: repeat(2, 1fr);
+        width: 80%;
+    }
+}
+
+@media (min-width: 1024px) {
+    #categories-container {
+        grid-template-columns: repeat(3, 1fr);
+        width: 70%;
+    }
 }
