@@ -68,4 +68,16 @@ function fetchModelDetails(modelId) {
     .finally(() => {
       hideLoading();
     });
+
+  const scrollButtonHtml = `<button id="scroll-button" title="Scroll Down">↓</button>`;
+  document.body.insertAdjacentHTML("beforeend", scrollButtonHtml);
+
+  document
+    .getElementById("scroll-button")
+    .addEventListener("click", function () {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth",
+      });
+    });
 }
