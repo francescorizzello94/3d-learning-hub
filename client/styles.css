@@ -1879,25 +1879,31 @@ details p {
     left: 50%;
     transform: translate(-50%, -50%);
     display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
     width: 90%;
     max-width: 100%;
-    overflow-y: auto;
+    max-height: 90vh;
+    overflow: auto;
+    scrollbar-width: none;
+}
+
+#categories-container::-webkit-scrollbar {
+    display: none;
 }
 
 @media (min-width: 768px) {
     #categories-container {
-        grid-template-columns: repeat(2, 1fr);
         width: 80%;
     }
 }
 
 @media (min-width: 1024px) {
     #categories-container {
-        grid-template-columns: repeat(3, 1fr);
         width: 70%;
     }
 }
+
 
 #scroll-button {
     position: fixed;
