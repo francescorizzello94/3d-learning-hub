@@ -45,9 +45,9 @@ To get a local copy up and running follow these simple example steps.
    ```
    touch server/.env
    ```
-2. Add the following environment variables to server/.env
+2. Add the environment variable credentials contained in the PPTX to server/.env
    ```
-   MONGODB_URI=mongodb+srv://IU_USER:SiR4tDlB2PJRvBnu@mern-template-cluster.oyvxygr.mongodb.net/?retryWrites=true&w=majority&appName=MERN-template-cluster
+   MONGODB_URI=[MONGODB_URI in PPTX]
    ```
 
 ## Run the app
