@@ -21,8 +21,7 @@
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+The following steps will aid you in setting up the project locally.
 
 ## Installation
 
