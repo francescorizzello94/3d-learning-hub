@@ -14,7 +14,7 @@
 <li> Interactive 3D model viewing </li>
 <li> Category-based model selection </li>
 <li> User rating and feedback collection </li>
-<li>Ser-side model compression and optimization </li>
+<li>Server-side model compression and optimization </li>
 </ol>
 
 
