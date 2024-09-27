@@ -26,32 +26,53 @@ To get a local copy up and running follow these simple example steps.
 
 ## Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
-   git clone https://github.com/your-username/3d-learning-hub.git
+   git clone https://github.com/francescorizzello94/3d-learning-hub.git
    ```
-3. Install NPM packages
-   ```sh
-   npm install
+2. Navigate intop the project directory
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+   cd 3d-learning-hub
+   ```
+3. Intall npm packages
+   ```
+   npm i
+   ```
+   
+## Setup
+
+1. Set up environment variables
+   ```
+   touch server/.env
+   ```
+2. Add the following environment variables to server/.env
+   ```
+   MONGODB_URI=mongodb+srv://IU_USER:SiR4tDlB2PJRvBnu@mern-template-cluster.oyvxygr.mongodb.net/?retryWrites=true&w=majority&appName=MERN-template-cluster
    ```
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+## Run the app
 
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+1. Development
+   ```
+   npm run dev
+   ```
+2. Production
+   ```
+   npm run build
+   npm run start
+   ```
+3. List of scripts in root package.json for individualized command execution
+   [npm run][command]
+   ```
+   "compress-models": "node scripts/compressModels.js",
+   "dev": "concurrently \"npm run dev:client\" \"npm run dev:server",
+   "dev:client": "npm run compress-models && cd client && vite",
+   "dev:server": "npm run compress-models && cd server && nodemon index.js",
+   "build": "cd client && vite build",
+   "start": "node server/index.js"
+   ```
+   
+   
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
