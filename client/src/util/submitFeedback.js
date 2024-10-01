@@ -18,6 +18,14 @@ export const handleSubmit = (
   loadingSpinner.style.display = "block";
   feedbackMessageContainer ? (feedbackMessageContainer.textContent = "") : null;
 
+  const feedbackData = {
+    rating: rating,
+  };
+
+  if (comment && comment.trim() !== "") {
+    feedbackData.comment = comment.trim();
+  }
+
   submitFeedback(modelId, rating, comment)
     .then((response) => {
       console.log("Feedback submitted", response.data);

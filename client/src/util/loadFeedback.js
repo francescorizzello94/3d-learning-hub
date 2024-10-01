@@ -21,12 +21,18 @@ export const loadFeedback = (modelId) => {
       feedbackContainer.appendChild(avgRatingDisplay);
 
       if (response.data.feedback && response.data.feedback.length > 0) {
-        const recentComment =
-          response.data.feedback[response.data.feedback.length - 1].comment;
-        const recentCommentDisplay = document.createElement("p");
-        recentCommentDisplay.className = "recent-comment-display";
-        recentCommentDisplay.textContent = `Most Recent Comment: ${recentComment}`;
-        feedbackContainer.appendChild(recentCommentDisplay);
+        const feedbacksWithComments = response.data.feedback.filter(
+          (fb) => fb.comment && fb.comment.trim() !== ""
+        );
+
+        if (feedbacksWithComments.length > 0) {
+          const recentComment =
+            feedbacksWithComments[feedbacksWithComments.length - 1].comment;
+          const recentCommentDisplay = document.createElement("p");
+          recentCommentDisplay.className = "recent-comment-display";
+          recentCommentDisplay.textContent = `Most Recent Comment: ${recentComment}`;
+          feedbackContainer.appendChild(recentCommentDisplay);
+        }
       }
 
       appendFeedbackForm(modelId, feedbackContainer);
